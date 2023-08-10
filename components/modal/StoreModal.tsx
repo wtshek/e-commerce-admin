@@ -18,6 +18,7 @@ import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -40,9 +41,10 @@ export const StoreModal = () => {
 
       const res = await axios.post("/api/stores", values);
 
-      console.log(res.data);
+      // refresh the entire web app
+      window.location.assign(`/${res.data.id}`);
     } catch (e) {
-      console.error(e);
+      toast.error("Something Went Wrong!");
     } finally {
       setLoading(false);
     }
