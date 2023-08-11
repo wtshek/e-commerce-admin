@@ -1,5 +1,6 @@
-import React from "react";
-import { BillboardClient } from "./components/BillboardClient";
+import React from 'react';
+
+import { BillboardClient } from './components/BillboardClient';
 
 export const BillboardsPage = () => {
   return (

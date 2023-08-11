@@ -1,8 +1,11 @@
-import prismadb from "@/lib/prismadb";
-import { isValidObjectId } from "@/lib/utils";
-import React, { FC } from "react";
-import BillboardForm from "./components/BillboardForm";
-import { Billboard } from "@prisma/client";
+import prismadb from '@/lib/prismadb';
+import { isValidObjectId } from '@/lib/utils';
+
+import React, { FC } from 'react';
+
+import { Billboard } from '@prisma/client';
+
+import BillboardForm from './components/BillboardForm';
 
 interface BillboardProps {
   params: { billboardId: string };
