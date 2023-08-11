@@ -1,25 +1,27 @@
-import prismadb from "@/lib/prismadb";
-import { auth } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
+import prismadb from '@/lib/prismadb';
+
+import { NextResponse } from 'next/server';
+
+import { auth } from '@clerk/nextjs';
 
 export async function POST(
   req: Request,
-  { params }: { params: { storeId: string } }
+  { params }: { params: { storeId: string } },
 ) {
   try {
     const { userId } = auth();
     const body = await req.json();
     const { label, imageUrl } = body;
 
-    if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
+    if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
 
     if (!label || !imageUrl)
-      return new NextResponse("Label and image url are required", {
+      return new NextResponse('Label and image url are required', {
         status: 400,
       });
 
     if (!params.storeId)
-      return new NextResponse("Store Id is required", {
+      return new NextResponse('Store Id is required', {
         status: 400,
       });
 
@@ -31,7 +33,7 @@ export async function POST(
     });
 
     if (!storeByUserId)
-      return new NextResponse("Unauthorized", { status: 403 });
+      return new NextResponse('Unauthorized', { status: 403 });
 
     const billboard = await prismadb.billboard.create({
       data: {
@@ -43,18 +45,18 @@ export async function POST(
 
     return NextResponse.json(billboard, { status: 201 });
   } catch (e) {
-    console.error("Billboards [POST]", e);
-    return new NextResponse("Internal error", { status: 500 });
+    console.error('Billboards [POST]', e);
+    return new NextResponse('Internal error', { status: 500 });
   }
 }
 
 export async function GET(
   req: Request,
-  { params }: { params: { storeId: string } }
+  { params }: { params: { storeId: string } },
 ) {
   try {
     const { userId } = auth();
-    if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
+    if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
 
     const billboards = await prismadb.billboard.findFirst({
       where: { storeId: params.storeId },
@@ -62,7 +64,7 @@ export async function GET(
 
     return NextResponse.json(billboards);
   } catch (e) {
-    console.log("Billboard [GET]", e);
-    return new NextResponse("Internal error", { status: 500 });
+    console.log('Billboard [GET]', e);
+    return new NextResponse('Internal error', { status: 500 });
   }
 }
