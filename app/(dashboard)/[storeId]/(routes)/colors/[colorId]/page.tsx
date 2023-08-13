@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 
 import { Color } from '@prisma/client';
 
-import ColorForm from './components/colorForm';
+import ColorForm from './components/ColorForm';
 
 interface ColorPageProps {
   params: { colorId: string };
