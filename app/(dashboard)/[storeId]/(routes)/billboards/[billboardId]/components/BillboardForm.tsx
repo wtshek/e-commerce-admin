@@ -14,7 +14,6 @@ import { Heading } from '@/components/ui/heading';
 import ImageUpload from '@/components/ui/image-upload';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
-import { useOrigin } from '@/hooks/useOrigin';
 
 import axios from 'axios';
 import { Trash } from 'lucide-react';
@@ -43,7 +42,6 @@ export const BillboardForm: FC<BillboardFormProps> = ({ initialData }) => {
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const router = useRouter();
-  const origin = useOrigin();
 
   const title = initialData ? 'Edit billboard' : 'Create billboard';
   const description = initialData ? 'Edit billboard' : 'Create a new billboard';

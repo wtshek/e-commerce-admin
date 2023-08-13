@@ -19,6 +19,7 @@ model Store{
   categories Category[]
   colors Color[]
   sizes Size[]
+  products Product[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -40,6 +41,7 @@ model Category{
   storeId String @db.ObjectId
   billboardId String @db.ObjectId
   billboard Billboard @relation( fields: [billboardId], references: [id])
+  products Product[]
   name String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -51,6 +53,7 @@ model Size {
   storeId String @db.ObjectId
   name String
   value String
+  products Product[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -61,6 +64,35 @@ model Color {
   storeId String @db.ObjectId
   name String
   value String
+  products Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  store Store @relation( fields: [storeId], references: [id])
+  storeId String @db.ObjectId
+  category Category @relation( fields: [categoryId], references: [id])
+  categoryId String @db.ObjectId
+  name String
+  price String // MongoDB doesn't support decimal right now
+  isFeatured Boolean @default(false)
+  isArchived Boolean @default(false)
+  size Size @relation( fields: [sizeId], references: [id])
+  sizeId String @db.ObjectId
+  colorId String @db.ObjectId
+  color Color @relation(fields: [colorId], references: [id])
+  images Image[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Image {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  productId String @db.ObjectId
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
