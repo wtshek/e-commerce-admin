@@ -14,7 +14,7 @@ interface ApiListProps {
 
 export const ApiList: FC<ApiListProps> = ({ entityIdName, entityName }) => {
   const params = useParams();
-  const origins = useOrigin();
+  const origin = useOrigin();
 
   const baseUrl = `${origin}/api/${params.storeId}`;
   return (
