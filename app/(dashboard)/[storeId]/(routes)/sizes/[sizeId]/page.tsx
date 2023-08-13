@@ -7,11 +7,11 @@ import { Size } from '@prisma/client';
 
 import SizeForm from './components/SizeForm';
 
-interface BillboardProps {
+interface SizePageProp {
   params: { sizeId: string };
 }
 
-export const BillboardPage: FC<BillboardProps> = async ({ params }) => {
+export const SizePage: FC<SizePageProp> = async ({ params }) => {
   let size: Size | null = null;
 
   if (isValidObjectId(params.sizeId)) {
@@ -31,4 +31,4 @@ export const BillboardPage: FC<BillboardProps> = async ({ params }) => {
   );
 };
 
-export default BillboardPage;
+export default SizePage;
