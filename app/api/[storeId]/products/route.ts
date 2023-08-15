@@ -89,9 +89,6 @@ export async function GET(
     const sizeId = searchParams.get('sizeId') || undefined;
     const isFeatured = searchParams.get('isFeatured');
 
-    const { userId } = auth();
-    if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-
     const products = await prismadb.product.findMany({
       where: {
         storeId: params.storeId,
