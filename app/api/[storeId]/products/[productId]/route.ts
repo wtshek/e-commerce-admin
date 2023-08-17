@@ -25,8 +25,6 @@ export async function PATCH(
       isArchived,
     } = body;
 
-    if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-
     if (
       !name ||
       !price ||
